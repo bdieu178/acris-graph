@@ -1,0 +1,20 @@
+version: '2'
+services:
+  neo4j:
+    image: neo4j:latest
+    cpuset: 0-2
+    volumes:
+        - "./neo4j_volume:/data"
+    ulimits:
+        nofile:
+            soft: 40000
+            hard: 40000
+    ports: 
+        - "7474:7474"
+    environment:
+        - NEO4J_dbms_memory_heap_maxSize=5000
+        - NEO4J_dbms_memory_pagecache_size=1000M
+    postgres:
+        image: postgres:latest
+        cpuset: 0-2
+        volumes:
